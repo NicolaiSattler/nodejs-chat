@@ -4,7 +4,7 @@ class auth0 {
     constructor(){
         dotenv.config({ path: './secret.env' });
 
-        this.authRequired = false;
+        this.authRequired = true;
         this.auth0Logout = true;
         this.secret = process.env.CLIENT_SECRET;
         this.baseURL = process.env.BASE_URL;
