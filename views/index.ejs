@@ -1,6 +1,10 @@
 <%- include('partials/navigation') %>
 
-<h1> Hello <%= locals.user %> </h1>
+<% if(locals.user) { %>
+
+    <h1> Hello <%= JSON.stringify(locals.user.given_name) %> </h1>
+
+<% } %>
 
 <%- include('partials/footer') %>
 

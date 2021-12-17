@@ -2,7 +2,6 @@ const http = require('http');
 const { Server } = require('socket.io');
 const dotenv = require('dotenv');
 
- 
 class socket {
     constructor(app){
         dotenv.config({ path: './secret.env' });
@@ -24,7 +23,7 @@ class socket {
         });
 
         socket.on('chat message', (msg) => {
-            io.emit('chat message', msg);
+            this.io.emit('chat message', msg);
             console.log(`message: ${msg}`);
         });
     }
