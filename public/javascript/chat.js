@@ -3,33 +3,43 @@ class Chat {
 
         this.messages = document.getElementById('messages');
         this.form = document.getElementById('form');
-        this.input = document.getElementById('input');
+        this.messageInput = document.getElementById('message');
+        this.userInput = document.getElementById('user');
 
         this.socket = io();
         this.init();
     }
 
     init(){
-        this.form.addEventListener('submit', (e) =>{
-            e.preventDefault();
+        this.form.addEventListener('submit', this.onFormSubmit.bind(this));
+        this.socket.on('chat message', this.onChatMessageReceived.bind(this));
+    }
 
-            if (input.value){
-                this.socket.emit('chat message', input.value);
-                this.input.value = '';
-            }
-        });
+    onFormSubmit(e) {
 
-        this.socket.on('chat message', (msg) => {
-            let li = document.createElement('li');
-            let y = document.body.scollHeight;
+        e.preventDefault();
 
-            li.textContent = msg;
+        if (this.messageInput.value){
+            let messageContent = {
+                user: this.userInput.value,
+                message: this.messageInput.value
+            };
+            let json = JSON.stringify(messageContent);
+            this.socket.emit('chat message', json);
+            this.messageInput.value = '';
+        }
+    }
 
-            this.messages.appendChild(li);
+    onChatMessageReceived(msg) {
+        let json = JSON.parse(msg);
+        let li = document.createElement('li');
+        let y = document.body.scollHeight;
 
-            window.scrollTo(0, y);
+        li.textContent = `${json.user}: ${json.message}`;
 
-        });
+        this.messages.appendChild(li);
+
+        window.scrollTo(0, y);
+
     }
 }
-

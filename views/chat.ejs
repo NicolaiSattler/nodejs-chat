@@ -6,7 +6,8 @@
 
 <ul id="messages"></ul>
 <form id="form" action="">
-    <input id="input" type="text" autocomplete="off"/>
+    <input id="user" type="hidden" value=<%= locals.username %> />
+    <input id="message" type="text" autocomplete="off"/>
     <button>Send</button>
 </form>
 

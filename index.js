@@ -21,6 +21,7 @@ app.use(handleError);
 function setUserToViews(req, res, next){
     if (req.oidc.user) {
         res.locals.user = req.oidc.user;
+        res.locals.username = req.oidc.user.given_name;
     } else {
         res.locals.user = null;
     }
