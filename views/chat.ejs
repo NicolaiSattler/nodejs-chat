@@ -4,12 +4,32 @@
 <script src="javascript/chat.js"></script>
 <script src="javascript/app.js"></script>
 
-<ul id="messages"></ul>
-<form id="form" action="">
-    <input id="user" type="hidden" value=<%= locals.username %> />
-    <input id="message" type="text" autocomplete="off"/>
-    <button>Send</button>
-</form>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Header...</h5>
+            </div>
+            <ul class="list-group list-group-flush" id="messages"></ul>
+            <div class="card-body">
+                <form class="col-md-12" id="form" action="">
+                    <input id="user" type="hidden" value=<%= locals.username %> />
+                    <div class="input-group">
+                        <input id="message" class="form-control" type="text" autofocus autocomplete="off"/>
+                        <button class="btn btn-outline-secondary" type="button">Send</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="col-md-4 input-group">
+                    <input class="form-control" id="room" type="text" />
+                    <button class="btn btn-outline-secondary" type="button" id="join-room">Join room</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <%- include('partials/footer') %>
 

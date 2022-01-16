@@ -4,17 +4,19 @@
   "description": "testing out socket.io",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "devStart": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nicolai Sattler",
   "license": "ISC",
   "dependencies": {
+    "@socket.io/admin-ui": "^0.2.0",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-openid-connect": "^2.5.1",
-    "socket.io": "^4.3.1"
+    "socket.io": "^4.3.1",
+    "socket.io-client": "^4.4.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
