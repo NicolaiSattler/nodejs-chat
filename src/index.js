@@ -1,17 +1,19 @@
 const express = require('express');
 const { auth } = require('express-openid-connect');
-const auth0 = require(`${__dirname}/core/auth0`);
-const socket = require(`${__dirname}/core/socket`);
-const router = require('./routes/index')
+const rootDir = `${process.cwd()}/src`;
+
+const auth0 = require(`${rootDir}/core/auth0`);
+const socket = require(`${rootDir}/core/socket`);
+const router = require(`${rootDir}/routes/index`)
 
 const app = express();
 const config = new auth0();
 const chatSocket = new socket(app);
 
-app.set('views', `${__dirname}/views`);
+app.set('views', `${rootDir}/views`);
 app.set('view engine', 'ejs');
 
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${rootDir}/public`));
 app.use(auth(config));
 app.use(setUserToViews);
 app.use('/', router);

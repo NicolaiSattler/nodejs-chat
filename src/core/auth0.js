@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 
 class auth0 {
     constructor(){
-        dotenv.config({ path: './secret.env' });
+        dotenv.config({ path: `${process.cwd()}/secret.env`});
 
         this.authRequired = true;
         this.auth0Logout = true;

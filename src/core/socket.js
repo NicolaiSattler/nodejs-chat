@@ -4,7 +4,8 @@ const dotenv = require('dotenv');
 
 class socket {
     constructor(app){
-        dotenv.config({ path: './secret.env' });
+
+        dotenv.config({ path: `${process.cwd()}/secret.env`});
 
         let port = process.env.PORT;
 
