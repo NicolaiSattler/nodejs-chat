@@ -1,13 +1,17 @@
-const http = require('http');
-const { Server } = require('socket.io');
-const dotenv = require('dotenv');
+import { Express } from 'express';
+import http from 'http';
+import dotenv from 'dotenv';
+import { Server } from 'socket.io';
 
-class socket {
-    constructor(app){
+export class socket {
+    public server: http.Server;
+    public io: Server;
+
+    constructor(app: Express){
 
         dotenv.config({ path: `${process.cwd()}/secret.env`});
 
-        let port = process.env.PORT;
+        let port = <string>process.env.PORT;
 
         this.server = http.createServer(app);
         this.server.listen(port, this.onListen(port));
@@ -16,11 +20,11 @@ class socket {
         this.init();
     }
 
-    init() {
+    private init() : void {
         this.io.on('connection', this.onConnection.bind(this));
     }
 
-    onConnection(socket) {
+    private onConnection(socket: any) : void {
         console.log(`An user connected with id ${socket.id}`);
 
         socket.on('disconnect', () => {
@@ -28,14 +32,14 @@ class socket {
         });
 
         socket.on('chat message', this.onChatMessageReceived.bind(this));
-        socket.on('join room', (room, callBack) => { 
+        socket.on('join room', (room: string, callBack: any) => { 
             socket.join(room) 
 
             callBack(`Joined room ${room}...`);
         });
     }
 
-    onChatMessageReceived(msg){
+    private onChatMessageReceived(msg: string): void {
         let json = JSON.parse(msg);
 
         if (json.room && json.room != null && json.room != ''){
@@ -45,9 +49,7 @@ class socket {
         console.log(`message: ${msg}`);
     }
 
-    onListen(port) {
+    private onListen(port: string): any {
         console.log(`listening on *:${port}`);
     }
 }
-
-module.exports = socket;

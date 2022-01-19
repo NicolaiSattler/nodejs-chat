@@ -1,6 +1,14 @@
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 
-class auth0 {
+export class auth0 {
+
+    public authRequired : boolean;
+    public auth0Logout : boolean;
+    public secret: string | undefined;
+    public baseURL: string | undefined;
+    public clientID: string | undefined;
+    public issuerBaseURL: string | undefined;
+
     constructor(){
         dotenv.config({ path: `${process.cwd()}/secret.env`});
 
@@ -12,5 +20,3 @@ class auth0 {
         this.issuerBaseURL = process.env.ISSUER_BASE_URL;
     }
 }
-
-module.exports = auth0;

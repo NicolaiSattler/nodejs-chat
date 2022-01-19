@@ -1,9 +1,9 @@
-const express = require('express');
-const { auth } = require('express-openid-connect');
-const rootDir = `${process.cwd()}/src`;
+import express, { Request, Response, NextFunction } from 'express';
+import { requiresAuth, auth } from 'express-openid-connect';
+import { auth0 } from '../src/core/auth0';
+import { socket } from '../src/core/socket';
 
-const auth0 = require(`${rootDir}/core/auth0`);
-const socket = require(`${rootDir}/core/socket`);
+const rootDir = `${process.cwd()}/src`;
 const router = require(`${rootDir}/routes/index`)
 
 const app = express();
@@ -20,7 +20,7 @@ app.use('/', router);
 app.use(handle404);
 app.use(handleError);
 
-function setUserToViews(req, res, next){
+function setUserToViews(req: Request, res: Response, next: NextFunction): void {
     if (req.oidc.user) {
         res.locals.user = req.oidc.user;
         res.locals.username = req.oidc.user.given_name;
@@ -31,15 +31,15 @@ function setUserToViews(req, res, next){
     next();
 }
 
-function handle404(req, res, next){
+function handle404(req: Request, res: Response, next: NextFunction): void {
     console.log(JSON.stringify(req));
 
-    const error = new Error("Not Found");
+    const error = <any>new Error("Not Found");
     error.status = 404;
     next(error);
 }
 
-function handleError(err, req, res, next) {
+function handleError(err: any, req: Express.Request, res: Response, next: NextFunction): void {
     console.log(JSON.stringify(req));
 
     res.status(err.status || 500);
