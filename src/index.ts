@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { requiresAuth, auth } from 'express-openid-connect';
+import { auth } from 'express-openid-connect';
 import { auth0 } from '../src/core/auth0';
 import { socket } from '../src/core/socket';
 
@@ -13,6 +13,7 @@ const chatSocket = new socket(app);
 app.set('views', `${rootDir}/views`);
 app.set('view engine', 'ejs');
 
+//TODO: install helmet package
 app.use(express.static(`${rootDir}/public`));
 app.use(auth(config));
 app.use(setUserToViews);
