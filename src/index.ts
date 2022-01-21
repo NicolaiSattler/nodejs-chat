@@ -14,6 +14,7 @@ app.set('views', `${rootDir}/views`);
 app.set('view engine', 'ejs');
 
 //TODO: install helmet package
+
 app.use(express.static(`${rootDir}/public`));
 app.use(auth(config));
 app.use(setUserToViews);

@@ -14,6 +14,9 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 package-lock.json
 .vimspector.json
 .vscode/
+src/public/javascript/*.js
+src/public/javascript/*.d.ts
+src/public/javascript/*.d.ts.map
 
 # Runtime data
 pids
