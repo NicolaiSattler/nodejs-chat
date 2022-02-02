@@ -13,6 +13,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 #user defined files & folders
 package-lock.json
 .vimspector.json
+nodemon.json
 .vscode/
 src/public/javascript/*.js
 src/public/javascript/*.d.ts

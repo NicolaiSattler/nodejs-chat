@@ -1,4 +1,4 @@
-import { Express } from 'express';
+import { Application } from 'express';
 import http from 'http';
 import dotenv from 'dotenv';
 import { Server } from 'socket.io';
@@ -7,7 +7,7 @@ export class socket {
     public server: http.Server;
     public io: Server;
 
-    constructor(app: Express){
+    constructor(app: Application ){
 
         dotenv.config({ path: `${process.cwd()}/secret.env`});
 
